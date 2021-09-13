@@ -15,21 +15,28 @@ class Home extends StatefulWidget{
 
 class _HomeState extends State<Home> {
   String _timeString;
+  String _date;
 @override
 void initState() {
-    _timeString = _formatDateTime(DateTime.now());
+    _timeString = _formatTime(DateTime.now());
+    _date = _formatedDate(DateTime.now());
     Timer.periodic(Duration(seconds: 1), (Timer t) => _getTime());
     super.initState();
   }
 void _getTime() {
     final DateTime now = DateTime.now();
-    final String formattedDateTime = _formatDateTime(now);
+    final String formattedTime = _formatTime(now);
+    final String date = _formatedDate(now);
     setState(() {
-      _timeString = formattedDateTime;
+      _timeString = formattedTime;
+      _date = date;
     });
   }
-  String _formatDateTime(DateTime dateTime) {
-    return DateFormat('EEE , d MMM yyyy').format(dateTime);
+  String _formatTime(DateTime dateTime) {
+    return DateFormat('kk:mm:ss').format(dateTime);
+  }
+  String _formatedDate(DateTime date){
+    return DateFormat('MM/dd/yyy').format(date);
   }
 
 Widget build(BuildContext context) {
@@ -52,6 +59,11 @@ Widget build(BuildContext context) {
 
                       
               Text( _timeString, style: TextStyle(color: Colors.white70, fontSize: 45, fontWeight: FontWeight.bold),),
+
+              Padding(
+                padding: const EdgeInsets.only(left: 48),
+                child: Text(_date, style: TextStyle(color: Colors.white, fontSize: 16,),),
+              ),
 
               // Padding(
               //   padding: const EdgeInsets.only(left: 35),
