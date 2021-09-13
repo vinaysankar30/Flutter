@@ -58,11 +58,11 @@ Widget build(BuildContext context) {
               SizedBox(height: 20,),
 
                       
-              Text( _timeString, style: TextStyle(color: Colors.white70, fontSize: 45, fontWeight: FontWeight.bold),),
+              Text( _timeString, style: TextStyle(color: Colors.black, fontSize: 45, fontWeight: FontWeight.bold),),
 
               Padding(
-                padding: const EdgeInsets.only(left: 48),
-                child: Text(_date, style: TextStyle(color: Colors.white, fontSize: 16,),),
+                padding: const EdgeInsets.only(left: 44),
+                child: Text(_date, style: TextStyle(color: Colors.black, fontSize: 18,fontWeight: FontWeight.bold),),
               ),
 
               // Padding(
