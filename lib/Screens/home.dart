@@ -45,6 +45,9 @@ void _getTime() {
   String _formatedDate(DateTime date){
     return DateFormat('MM/dd/yyy').format(date);
   }
+  Future<void> _refresh(BuildContext context) async{
+    await Provider.of<TodoModel>(context,listen: false).fetchandSet();
+  }
 
 Widget build(BuildContext context) {
 
@@ -57,57 +60,62 @@ Widget build(BuildContext context) {
         title: Text("Todo Application", style: TextStyle(color: Colors.white),),
         leading: IconButton(icon: Icon(Icons.menu, color: Colors.white70,), onPressed: () {  },),
       ),
-      body: Column(
-        children: <Widget>[
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              SizedBox(height: 20,),
+      body: RefreshIndicator( onRefresh: ()=>_refresh(context),
+        child: Column(
+          children: <Widget>[
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                SizedBox(height: 20,),
 
-                      
-              Text( _timeString, style: TextStyle(color: Colors.black, fontSize: 45, fontWeight: FontWeight.bold),),
-
-              Padding(
-                padding: const EdgeInsets.only(left: 44),
-                child: Text(_date, style: TextStyle(color: Colors.black, fontSize: 18,fontWeight: FontWeight.bold),),
-              ),
-
-              SizedBox(height: 20,)
-
-            ],
-          ), 
-          Expanded(
-            child:Container(
-
-              decoration: BoxDecoration(borderRadius: BorderRadius.only(topRight: Radius.circular(50), topLeft: Radius.circular(60)), color: Colors.white),
-              child: Consumer<TodoModel>(
-                builder: (context, todo, child){
-                  return _isLoading? Center(child: CircularProgressIndicator(backgroundColor: Colors.black12,)):ListView.builder(
-                      itemCount: todo.tasklist.length,
-                      itemBuilder: (context, index){
-                        return Container(
                         
-                          child: ListTile(
-                            contentPadding: EdgeInsets.only(left: 32, right: 32, top: 8, bottom: 8),
-                            title: Text(todo.tasklist[index].title, style : TextStyle(color: Colors.black87,
-                                fontWeight: FontWeight.bold),),
-                            subtitle: Text(todo.tasklist[index].detail, style: TextStyle(color: Colors.black45,
-                                fontWeight: FontWeight.bold),),
+                Text( _timeString, style: TextStyle(color: Colors.black, fontSize: 45, fontWeight: FontWeight.bold),),
 
-                            trailing: Icon(Icons.check_circle, color: Colors.greenAccent,),
-                          ),
-                          margin: EdgeInsets.only(bottom: 8, left: 16, right: 16),
-                        );
-                      }
-                  );
-                },
-              )
+                Padding(
+                  padding: const EdgeInsets.only(left: 44),
+                  child: Text(_date, style: TextStyle(color: Colors.black, fontSize: 18,fontWeight: FontWeight.bold),),
+                ),
+
+                SizedBox(height: 20,)
+
+              ],
+            ), 
+            Expanded(
+              child:Container(
+
+                decoration: BoxDecoration(borderRadius: BorderRadius.only(topRight: Radius.circular(50), topLeft: Radius.circular(60)), color: Colors.white),
+                child: Consumer<TodoModel>(
+                  builder: (context, todo, child){
+                    return _isLoading? Center(child: 
+                    CircularProgressIndicator(backgroundColor: Colors.black12,)
+                    )
+                    :ListView.builder(
+                        itemCount: todo.tasklist.length,
+                        itemBuilder: (context, index){
+                          return Container(
+                          
+                            child: ListTile(
+                              contentPadding: EdgeInsets.only(left: 32, right: 32, top: 8, bottom: 8),
+                              title: Text(todo.tasklist[index].title, style : TextStyle(color: Colors.black87,
+                                  fontWeight: FontWeight.bold),),
+                              subtitle: Text(todo.tasklist[index].detail, style: TextStyle(color: Colors.black45,
+                                  fontWeight: FontWeight.bold),),
+
+                              trailing: Icon(Icons.check_circle, color: Colors.greenAccent,),
+                            ),
+                            margin: EdgeInsets.only(bottom: 8, left: 16, right: 16),
+                          );
+                        }
+                    );
+                  },
+                )
 
 
-            ),
-          )
+              ),
+            )
 
-        ],
+          ],
+        ),
       ),
       
       );
