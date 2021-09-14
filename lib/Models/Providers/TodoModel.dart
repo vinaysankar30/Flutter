@@ -1,5 +1,6 @@
 
 
+
 import 'dart:ffi';
 
 import 'package:flutter/cupertino.dart';
@@ -13,11 +14,28 @@ class TodoModel extends ChangeNotifier{
   Future<void> addTaskInList(TaskModel taskModel) async {
   var url = Uri.parse('https://todoapp-72f66-default-rtdb.firebaseio.com/mynotes.json');
 // .then((value) => tasklist.add(taskModel)
-    final response = await http.post(url,body:jsonEncode({
+   http.post(url,body:jsonEncode({
       'title':taskModel.title,
       'detail':taskModel.detail
-    }),).then((value) => tasklist.add(taskModel));
+    }),);
     
       notifyListeners();
+  }
+  Future<Void> fetchandSet() async{
+    var url = Uri.parse('https://todoapp-72f66-default-rtdb.firebaseio.com/mynotes.json');
+    final response = await http.get(url);
+    final extractedData = jsonDecode(response.body) as Map<String,dynamic>;
+    final List<TaskModel>loaded = [];
+    extractedData.forEach((key, value) {
+      loaded.add(TaskModel(
+        title: value['title'],
+        detail: value['detail'],
+      )
+        );
+    });
+    tasklist = loaded;
+    notifyListeners();
+   
+    
   }
 }

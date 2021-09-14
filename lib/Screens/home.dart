@@ -14,10 +14,12 @@ class Home extends StatefulWidget{
 }
 
 class _HomeState extends State<Home> {
+  var _futureNotes;
   String _timeString;
   String _date;
 @override
 void initState() {
+    _futureNotes = Provider.of<TodoModel>(context,listen: false).fetchandSet();
     _timeString = _formatTime(DateTime.now());
     _date = _formatedDate(DateTime.now());
     Timer.periodic(Duration(seconds: 1), (Timer t) => _getTime());

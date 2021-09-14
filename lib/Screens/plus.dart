@@ -21,13 +21,8 @@ class _MyAppState extends State<MyApp> {
   TextEditingController contentController = TextEditingController();
   String name;
   String content;
-  final _formKey = GlobalKey<FormState>();
-   var _isLoading = false;
-   @override
-   void initState() {
-       // TODO: implement initState
-       super.initState();
-     }
+ 
+
   @override
   Widget build(BuildContext context) {
   
@@ -78,8 +73,8 @@ class _MyAppState extends State<MyApp> {
                     onTap:(){Provider.of<TodoModel>(context,listen: false).
                     
                     addTaskInList(
-                      TaskModel(nameController.text.toString(),
-                      contentController.text.toString()
+                      TaskModel(title:nameController.text.toString(),
+                      detail:contentController.text.toString()
                       
                       )
                       );
