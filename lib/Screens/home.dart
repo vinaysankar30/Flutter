@@ -3,24 +3,22 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_original/Models/Providers/TodoModel.dart';
-import 'plus.dart';
 import 'package:intl/intl.dart';
 class Home extends StatefulWidget{
  
-  // DateTime now = DateTime.now();
-  // final DateFormat formatter = DateFormat();
   @override
   _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
-  var _futureNotes;
+  
+  
   String _timeString;
   String _date;
   var _isLoading = true;
 @override
 void initState() {
-    _futureNotes = Provider.of<TodoModel>(context,listen: false).fetchandSet().then((_) => {
+    Provider.of<TodoModel>(context,listen: false).fetchandSet().then((_) => {
       setState((){
         _isLoading = false;
       })
@@ -61,6 +59,7 @@ Widget build(BuildContext context) {
         leading: IconButton(icon: Icon(Icons.menu, color: Colors.white70,), onPressed: () {  },),
       ),
       body: RefreshIndicator( onRefresh: ()=>_refresh(context),
+      
         child: Column(
           children: <Widget>[
             Column(
