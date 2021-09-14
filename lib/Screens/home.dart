@@ -17,9 +17,14 @@ class _HomeState extends State<Home> {
   var _futureNotes;
   String _timeString;
   String _date;
+  var _isLoading = true;
 @override
 void initState() {
-    _futureNotes = Provider.of<TodoModel>(context,listen: false).fetchandSet();
+    _futureNotes = Provider.of<TodoModel>(context,listen: false).fetchandSet().then((_) => {
+      setState((){
+        _isLoading = false;
+      })
+    });
     _timeString = _formatTime(DateTime.now());
     _date = _formatedDate(DateTime.now());
     Timer.periodic(Duration(seconds: 1), (Timer t) => _getTime());
@@ -67,23 +72,17 @@ Widget build(BuildContext context) {
                 child: Text(_date, style: TextStyle(color: Colors.black, fontSize: 18,fontWeight: FontWeight.bold),),
               ),
 
-              // Padding(
-              //   padding: const EdgeInsets.only(left: 35),
-              //   child: Text( _timeString, style: TextStyle(color: Colors.white, fontSize: 16,),),
-              // ),
-
               SizedBox(height: 20,)
 
             ],
-          ), //to show the clock
-
+          ), 
           Expanded(
             child:Container(
 
               decoration: BoxDecoration(borderRadius: BorderRadius.only(topRight: Radius.circular(50), topLeft: Radius.circular(60)), color: Colors.white),
               child: Consumer<TodoModel>(
                 builder: (context, todo, child){
-                  return ListView.builder(
+                  return _isLoading? Center(child: CircularProgressIndicator(backgroundColor: Colors.black12,)):ListView.builder(
                       itemCount: todo.tasklist.length,
                       itemBuilder: (context, index){
                         return Container(
