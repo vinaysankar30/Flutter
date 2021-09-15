@@ -27,7 +27,9 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
   
     return  AlertDialog(
+      backgroundColor: Colors.yellow[50],
             shape: RoundedRectangleBorder(
+              
                 borderRadius: BorderRadius.all(Radius.circular(32.0))),
             contentPadding: EdgeInsets.only(top: 10.0),
             content: Container(

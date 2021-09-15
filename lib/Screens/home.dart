@@ -11,8 +11,10 @@ class Home extends StatefulWidget{
 }
 
 class _HomeState extends State<Home> {
-  
-  
+  double xOffset = 0;
+  double yOffset = 0;
+  double scaleFactor = 1;
+  bool isDrawerOpen = false;
   String _timeString;
   String _date;
   var _isLoading = true;
@@ -50,74 +52,103 @@ void _getTime() {
 Widget build(BuildContext context) {
 
     // TODO: implement build
-    return Scaffold(
-      backgroundColor: Colors.lightBlue[700],
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        title: Text("Todo Application", style: TextStyle(color: Colors.white),),
-        leading: IconButton(icon: Icon(Icons.menu, color: Colors.white70,), onPressed: () {  },),
+    return AnimatedContainer(
+      decoration: BoxDecoration(
+        color: Colors.yellow[50],
+        borderRadius: BorderRadius.circular(40)
       ),
-      body: RefreshIndicator( onRefresh: ()=>_refresh(context),
-      
-        child: Column(
-          children: <Widget>[
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+      transform: Matrix4.translationValues(xOffset,yOffset,0)..scale(scaleFactor)..rotateY(isDrawerOpen? -0.5:0),
+      duration: Duration(milliseconds: 250),
+      child: ClipRRect(borderRadius: BorderRadius.circular(isDrawerOpen? 40:0.0),
+        child: Scaffold(
+          backgroundColor: Colors.lightBlue[700],
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            title: Text("Todo Application", style: TextStyle(color: Colors.white),),
+            leading: isDrawerOpen? IconButton(
+              icon: Icon(Icons.arrow_back_ios),
+              onPressed: (){
+                setState(() {
+                                xOffset = 0;
+                                yOffset=0;
+                                scaleFactor = 1;
+                                isDrawerOpen = false;
+                              });
+              },
+            ) :
+            IconButton(icon: Icon(Icons.menu, color: Colors.white70,), onPressed: () { 
+
+            setState(() {
+                      xOffset = 230;
+                      yOffset = 150;
+                      scaleFactor = 0.6;
+                      isDrawerOpen=true;
+                    });
+             },),
+          ),
+          body: RefreshIndicator( onRefresh: ()=>_refresh(context).then((_) => ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: const Text("Updated")))),
+          
+            child: Column(
               children: <Widget>[
-                SizedBox(height: 20,),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    SizedBox(height: 20,),
 
-                        
-                Text( _timeString, style: TextStyle(color: Colors.black, fontSize: 45, fontWeight: FontWeight.bold),),
+                            
+                    Text( _timeString, style: TextStyle(color: Colors.black, fontSize: 45, fontWeight: FontWeight.bold),),
 
-                Padding(
-                  padding: const EdgeInsets.only(left: 44),
-                  child: Text(_date, style: TextStyle(color: Colors.black, fontSize: 18,fontWeight: FontWeight.bold),),
-                ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 44),
+                      child: Text(_date, style: TextStyle(color: Colors.black, fontSize: 18,fontWeight: FontWeight.bold),),
+                    ),
 
-                SizedBox(height: 20,)
+                    SizedBox(height: 20,)
 
-              ],
-            ), 
-            Expanded(
-              child:Container(
+                  ],
+                ), 
+                Expanded(
+                  child:Container(
 
-                decoration: BoxDecoration(borderRadius: BorderRadius.only(topRight: Radius.circular(50), topLeft: Radius.circular(60)), color: Colors.white),
-                child: Consumer<TodoModel>(
-                  builder: (context, todo, child){
-                    return _isLoading? Center(child: 
-                    CircularProgressIndicator(backgroundColor: Colors.black12,)
+                    decoration: BoxDecoration(borderRadius: BorderRadius.only(topRight: Radius.circular(50), topLeft: Radius.circular(60)), color: Colors.yellow[50]),
+                    child: Consumer<TodoModel>(
+                      builder: (context, todo, child){
+                        return _isLoading? Center(child: 
+                        CircularProgressIndicator(backgroundColor: Colors.black12,)
+                        )
+                        :ListView.builder(
+                            itemCount: todo.tasklist.length,
+                            itemBuilder: (context, index){
+                              return Container(
+                              
+                                child: ListTile(
+                                  contentPadding: EdgeInsets.only(left: 32, right: 32, top: 8, bottom: 8),
+                                  title: Text(todo.tasklist[index].title, style : TextStyle(color: Colors.black87,
+                                      fontWeight: FontWeight.bold),),
+                                  subtitle: Text(todo.tasklist[index].detail, style: TextStyle(color: Colors.black45,
+                                      fontWeight: FontWeight.bold),),
+
+                                  trailing: Icon(Icons.check_circle, color: Colors.greenAccent,),
+                                ),
+                                margin: EdgeInsets.only(bottom: 8, left: 16, right: 16),
+                              );
+                            }
+                        );
+                      },
                     )
-                    :ListView.builder(
-                        itemCount: todo.tasklist.length,
-                        itemBuilder: (context, index){
-                          return Container(
-                          
-                            child: ListTile(
-                              contentPadding: EdgeInsets.only(left: 32, right: 32, top: 8, bottom: 8),
-                              title: Text(todo.tasklist[index].title, style : TextStyle(color: Colors.black87,
-                                  fontWeight: FontWeight.bold),),
-                              subtitle: Text(todo.tasklist[index].detail, style: TextStyle(color: Colors.black45,
-                                  fontWeight: FontWeight.bold),),
 
-                              trailing: Icon(Icons.check_circle, color: Colors.greenAccent,),
-                            ),
-                            margin: EdgeInsets.only(bottom: 8, left: 16, right: 16),
-                          );
-                        }
-                    );
-                  },
+
+                  ),
                 )
 
-
-              ),
-            )
-
-          ],
-        ),
+              ],
+            ),
+          ),
+          
+          ),
       ),
-      
-      );
+    );
 
 
 

@@ -28,7 +28,7 @@ class _MyHomePageState extends State<MyHomePage> {
           TabItem(icon: Icons.add),
           TabItem(icon: Icons.search)
         ],
-        activeColor: Colors.white,
+        activeColor: Colors.yellow[50],
         initialActiveIndex: 1,
         onTap: (int i){
           setState(() {
