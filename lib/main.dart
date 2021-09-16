@@ -23,13 +23,9 @@ class MyApp extends StatelessWidget {
       ),
       home: ChangeNotifierProvider(
         create: (context) => TodoModel(),
-        child: Stack(children: [
-       DrawerScreen(),
+        child: 
           MyHomePage(),
-            
-          ],),
         ),
     );
   }
 }
-

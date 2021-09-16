@@ -9,7 +9,9 @@ class DrawerScreen extends StatefulWidget {
 class _DrawerScreenState extends State<DrawerScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Scaffold(
+      body: Container(
+        
       color: Colors.lightBlue[700],
       padding: EdgeInsets.only(top:50,bottom: 70,left: 10),
       child: Column(
@@ -62,6 +64,6 @@ class _DrawerScreenState extends State<DrawerScreen> {
         ],
       ),
 
-    );
+    ));
   }
 }
