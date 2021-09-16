@@ -53,7 +53,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                     
                     )),
                   leading: Icon(FontAwesomeIcons.userAlt),
-                  onLongPress: (){},
+                  onTap: (){},
                   ),
                   Divider(),
     
