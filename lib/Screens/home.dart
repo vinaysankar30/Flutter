@@ -115,7 +115,8 @@ Widget build(BuildContext context) {
                   Expanded(
                     child:Container(
 
-                      decoration: BoxDecoration(borderRadius: BorderRadius.only(topRight: Radius.circular(50), topLeft: Radius.circular(60)), color: Colors.yellow[50]),
+                      decoration: BoxDecoration(borderRadius: BorderRadius.only(topRight: Radius.circular(50), 
+                      topLeft: Radius.circular(60)), color: Colors.yellow[50]),
                       child: Consumer<TodoModel>(
                         builder: (context, todo, child){
                           return _isLoading? Center(child: 

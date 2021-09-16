@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todo_original/Models/drawercontent.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class DrawerScreen extends StatefulWidget {
   @override
@@ -10,60 +10,147 @@ class _DrawerScreenState extends State<DrawerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+      backgroundColor: Colors.lightBlue[700],
+      body: ListView(
         
-      color: Colors.lightBlue[700],
-      padding: EdgeInsets.only(top:50,bottom: 70,left: 10),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              CircleAvatar(),
-              SizedBox(width: 10,),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Vinay',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
-                  Text('Active Status',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold))
-                ],
-              )
-            ],
-          ),
+          padding: EdgeInsets.all(0.0),
+          children: <Widget>[
+              InkWell(
+                onTap:(){} ,
+                child: UserAccountsDrawerHeader(
+                  accountName: Text('C Vinay Sankar',style: TextStyle(fontSize: 20),),
+                  accountEmail: Text('vinaysankar30@gmail.com',style: TextStyle(fontSize: 16),),
+                   currentAccountPicture: CircleAvatar(
+                     backgroundColor: Colors.red,
+                        backgroundImage: ExactAssetImage('assets/aleydon.jpg'),
+                    ),
 
-          Column(
-            children: drawerItems.map((element) => Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  Icon(element['icon'],color: Colors.white,size: 30,),
-                  SizedBox(width: 10,),
-                  Text(element['title'],style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20))
-                ],
 
+                  decoration: BoxDecoration(
+                    color: Colors.lightBlue[700],
+                  image: DecorationImage(
+                    image: AssetImage("assets/fundo.jpg"),
+                       fit: BoxFit.cover)
+                ),),
               ),
-            )).toList(),
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(topRight: Radius.circular(50), 
+                      topLeft: Radius.circular(60)),
+                color: Colors.green[100]
+              ),
+              child:
+              Padding(
+                padding: const EdgeInsets.only(left: 30),
+                child: Column(children: [
+                  SizedBox(height: 15,),
+             ListTile(
+                 
+                  title: Text('Profile',style: TextStyle(
+                    
+                    fontWeight: FontWeight.bold,
+                    
+                    
+                    )),
+                  leading: Icon(FontAwesomeIcons.userAlt),
+                  onLongPress: (){},
+                  ),
+                  Divider(),
+    
+                
+                ListTile(
+                  title: Text('New Note',style: TextStyle(
+                    
+                    fontWeight: FontWeight.bold,
+                    
+                    
+                    )),
+                  leading: Icon(FontAwesomeIcons.plusCircle),
+                  onTap: (){},
+                  ),
+
+                Divider(),
+           
+
+
+                ListTile(
+                  title: Text('Search',style: TextStyle(
+                    
+                    fontWeight: FontWeight.bold,
+                    
+                    
+                    )),
+                  leading: Icon(FontAwesomeIcons.search),
+                  onTap: (){},
+                  ),
+
+
+                Divider(),
+
+
+                ListTile(
+                  title: Text('Share Note',style: TextStyle(
+                    
+                    fontWeight: FontWeight.bold,
+                    
+                    
+                    )),
+                  leading: Icon(FontAwesomeIcons.share),
+                 onTap: (){},
+                  ),
+
+
+      
+                Divider(),
+
+
+                ListTile(
+                  title: Text('Settings',style: TextStyle(
+                    
+                    fontWeight: FontWeight.bold,
+                    
+                    
+                    )),
+                  leading: Icon(FontAwesomeIcons.tools),
+                  onTap: (){},
+                  ),
+
+                Divider(),
+                
+
+                ListTile(
+                  title: Text('Support',style: TextStyle(
+                    
+                    fontWeight: FontWeight.bold,
+                    
+                    
+                    )),
+                  leading: Icon(Icons.report_problem),
+                  onTap: (){},
+                  ),
+
+      
+                Divider(),
+
+                ListTile(
+                  title: Text('Close',style: TextStyle(
+                    
+                    fontWeight: FontWeight.bold,
+                    
+                    
+                    )),
+                  leading: Icon(FontAwesomeIcons.windowClose),
+                  onTap: (){
+                    Navigator.of(context).pop();}
+                  ),
+          ],
           ),
-
-          Row(
-            children: [
-              Icon(Icons.settings,color: Colors.white,),
-              SizedBox(width: 10,),
-              Text('Settings',style:TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
-              SizedBox(width: 10,),
-              Container(width: 2,height: 20,color: Colors.white,),
-              SizedBox(width: 10,),
-              Text('Log out',style:TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)
-
-
-            ],
-
-          )
-
-
-        ],
-      ),
-
-    ));
+              ),
+          ),
+          ],
+        ),
+      );
   }
-}
+    
+  }
+    
