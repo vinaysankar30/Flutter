@@ -116,7 +116,7 @@ Widget build(BuildContext context) {
                     child:ClipRRect(
                     borderRadius: BorderRadius.only(topLeft: Radius.circular(50),topRight: Radius.circular(50)),
                       child: Scaffold(
-                       backgroundColor: Colors.yellow[50],
+                       backgroundColor: Colors.green[100],
                         body: Consumer<TodoModel>(
                           builder: (context, todo, child){
                             return _isLoading? Center(child: 
@@ -126,14 +126,14 @@ Widget build(BuildContext context) {
                                 itemCount: todo.tasklist.length,
                                 itemBuilder: (context, index){
                                   return Column(children: [
-                                    SizedBox(height: 20,),
-                                     Container(
-                                       decoration: BoxDecoration(
-                                         border: Border.all(color: Colors.black),
+                                    SizedBox(height: 10,),
+                                    Card(
+                                      elevation: 10,
+                                      color: Colors.yellow[50],
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(20)
 
-                                         borderRadius: BorderRadius.circular(25)
-                                       ),
-                                      
+                                      ),
                                       child: ListTile(
                                         onTap: (){},
                                         contentPadding: EdgeInsets.only(left: 32, right: 32, top: 8, bottom: 8),

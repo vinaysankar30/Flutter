@@ -1,8 +1,5 @@
 
 
-
-import 'dart:ffi';
-
 import 'package:flutter/cupertino.dart';
 import 'package:todo_original/Models/TaskModel.dart';
 import 'package:http/http.dart' as http;
@@ -21,7 +18,7 @@ class TodoModel extends ChangeNotifier{
     
       notifyListeners();
   }
-  Future<Void> fetchandSet() async{
+  Future<void> fetchandSet() async{
     var url = Uri.parse('https://todoapp-72f66-default-rtdb.firebaseio.com/mynotes.json');
     final response = await http.get(url);
     final extractedData = jsonDecode(response.body) as Map<String,dynamic>;
