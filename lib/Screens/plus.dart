@@ -2,6 +2,7 @@ import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_original/Models/Providers/TodoModel.dart';
 import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
@@ -17,6 +18,13 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  DateTime now = DateTime.now();
+  String time(){
+    return DateFormat('kk:mm:ss').format(now);
+  }
+  String date(){
+    return  DateFormat('dd/MM/yyy').format(now);
+  }
   TextEditingController nameController = TextEditingController();
   TextEditingController contentController = TextEditingController();
   String name;
@@ -76,7 +84,9 @@ class _MyAppState extends State<MyApp> {
                     
                     addTaskInList(
                       TaskModel(title:nameController.text.toString(),
-                      detail:contentController.text.toString()
+                      detail:contentController.text.toString(),
+                      time:time(),
+                      date:date()
                       
                       )
                       );

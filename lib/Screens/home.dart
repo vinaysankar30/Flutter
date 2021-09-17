@@ -12,6 +12,7 @@ class Home extends StatefulWidget{
 }
 
 class _HomeState extends State<Home> {
+  
   double xOffset = 0;
   double yOffset = 0;
   double scaleFactor = 1;
@@ -44,7 +45,7 @@ void _getTime() {
     return DateFormat('kk:mm:ss').format(dateTime);
   }
   String _formatedDate(DateTime date){
-    return DateFormat('MM/dd/yyy').format(date);
+    return DateFormat('dd/MM/yyy').format(date);
   }
   Future<void> _refresh(BuildContext context) async{
     await Provider.of<TodoModel>(context,listen: false).fetchandSet();
@@ -141,8 +142,27 @@ Widget build(BuildContext context) {
                                             fontWeight: FontWeight.bold),),
                                         subtitle: Text(todo.tasklist[index].detail, style: TextStyle(color: Colors.black45,
                                             fontWeight: FontWeight.bold),),
+                                          
+                                        trailing:   Container(
+                                          decoration: BoxDecoration(border: Border(left: BorderSide(
+                                            
+                                            color: Colors.black
 
-                                        trailing: Icon(Icons.check_circle, color: Colors.greenAccent,),
+                                          ))),
+                                          child: Column(
+                                            children: [
+                                              
+                                               Icon(Icons.check_circle, color: Colors.greenAccent,),
+                                               SizedBox(
+                                                 height: 14,
+                                               ),
+                                              Text(todo.tasklist[index].date, style : TextStyle(color: Colors.black,
+                                              fontWeight: FontWeight.bold,fontSize: 8),),
+                                              Text(todo.tasklist[index].time, style : TextStyle(color: Colors.black,
+                                              fontWeight: FontWeight.bold,fontSize: 8),),
+                                            ],
+                                          ),
+                                        ),
                                       ),
                                       margin: EdgeInsets.only(bottom: 8, left: 16, right: 16),
                                     ),]

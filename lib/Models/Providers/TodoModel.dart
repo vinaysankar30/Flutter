@@ -13,7 +13,9 @@ class TodoModel extends ChangeNotifier{
 // .then((value) => tasklist.add(taskModel)
    http.post(url,body:jsonEncode({
       'title':taskModel.title,
-      'detail':taskModel.detail
+      'detail':taskModel.detail,
+      'time':taskModel.time,
+      'date':taskModel.date,
     }),);
     
       notifyListeners();
@@ -27,6 +29,8 @@ class TodoModel extends ChangeNotifier{
       loaded.add(TaskModel(
         title: value['title'],
         detail: value['detail'],
+        time: value['time'],
+        date: value['date']
       )
         );
     });
