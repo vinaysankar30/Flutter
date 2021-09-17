@@ -113,37 +113,47 @@ Widget build(BuildContext context) {
                     ],
                   ), 
                   Expanded(
-                    child:Container(
+                    child:ClipRRect(
+                    borderRadius: BorderRadius.only(topLeft: Radius.circular(50),topRight: Radius.circular(50)),
+                      child: Scaffold(
+                       backgroundColor: Colors.yellow[50],
+                        body: Consumer<TodoModel>(
+                          builder: (context, todo, child){
+                            return _isLoading? Center(child: 
+                            CircularProgressIndicator(backgroundColor: Colors.black12,)
+                            )
+                            :ListView.builder(
+                                itemCount: todo.tasklist.length,
+                                itemBuilder: (context, index){
+                                  return Column(children: [
+                                    SizedBox(height: 20,),
+                                     Container(
+                                       decoration: BoxDecoration(
+                                         border: Border.all(color: Colors.black),
 
-                      decoration: BoxDecoration(borderRadius: BorderRadius.only(topRight: Radius.circular(50), 
-                      topLeft: Radius.circular(60)), color: Colors.yellow[50]),
-                      child: Consumer<TodoModel>(
-                        builder: (context, todo, child){
-                          return _isLoading? Center(child: 
-                          CircularProgressIndicator(backgroundColor: Colors.black12,)
-                          )
-                          :ListView.builder(
-                              itemCount: todo.tasklist.length,
-                              itemBuilder: (context, index){
-                                return Container(
-                                
-                                  child: ListTile(
-                                    contentPadding: EdgeInsets.only(left: 32, right: 32, top: 8, bottom: 8),
-                                    title: Text(todo.tasklist[index].title, style : TextStyle(color: Colors.black87,
-                                        fontWeight: FontWeight.bold),),
-                                    subtitle: Text(todo.tasklist[index].detail, style: TextStyle(color: Colors.black45,
-                                        fontWeight: FontWeight.bold),),
+                                         borderRadius: BorderRadius.circular(25)
+                                       ),
+                                      
+                                      child: ListTile(
+                                        onTap: (){},
+                                        contentPadding: EdgeInsets.only(left: 32, right: 32, top: 8, bottom: 8),
+                                        title: Text(todo.tasklist[index].title, style : TextStyle(color: Colors.black87,
+                                            fontWeight: FontWeight.bold),),
+                                        subtitle: Text(todo.tasklist[index].detail, style: TextStyle(color: Colors.black45,
+                                            fontWeight: FontWeight.bold),),
 
-                                    trailing: Icon(Icons.check_circle, color: Colors.greenAccent,),
-                                  ),
-                                  margin: EdgeInsets.only(bottom: 8, left: 16, right: 16),
-                                );
-                              }
-                          );
-                        },
-                      )
+                                        trailing: Icon(Icons.check_circle, color: Colors.greenAccent,),
+                                      ),
+                                      margin: EdgeInsets.only(bottom: 8, left: 16, right: 16),
+                                    ),]
+                                  );
+                                }
+                            );
+                          },
+                        )
 
 
+                      ),
                     ),
                   )
 

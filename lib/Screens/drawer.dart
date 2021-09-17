@@ -22,15 +22,15 @@ class _DrawerScreenState extends State<DrawerScreen> {
                   accountEmail: Text('vinaysankar30@gmail.com',style: TextStyle(fontSize: 16),),
                    currentAccountPicture: CircleAvatar(
                      backgroundColor: Colors.red,
-                        backgroundImage: ExactAssetImage('assets/aleydon.jpg'),
+                        // backgroundImage: ExactAssetImage(),
                     ),
 
 
                   decoration: BoxDecoration(
                     color: Colors.lightBlue[700],
-                  image: DecorationImage(
-                    image: AssetImage("assets/fundo.jpg"),
-                       fit: BoxFit.cover)
+                  // image: DecorationImage(
+                    // image: AssetImage("assets/fundo.jpg"),
+                      //  fit: BoxFit.cover)
                 ),),
               ),
             Container(
