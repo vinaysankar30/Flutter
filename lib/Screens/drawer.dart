@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:todo_original/Screens/plus.dart';
 import 'package:touch_ripple_effect/touch_ripple_effect.dart';
 
 
@@ -72,7 +73,9 @@ class _DrawerScreenState extends State<DrawerScreen> {
                rippleColor: Colors.grey,
                onTap: (){
                   Feedback.forTap(context);
-                  Navigator.pushNamed(context, '/addNew');
+                  //Navigator.pushNamed(context, '/addNew');
+                  Navigator.of(context).push( MaterialPageRoute(builder: 
+                   (context) => MyApp()));
                },
                   child: ListTile(
                     title: Text('New Note',style: TextStyle(

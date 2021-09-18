@@ -58,7 +58,7 @@ Widget build(BuildContext context) {
       DrawerScreen(),
        AnimatedContainer(
         decoration: BoxDecoration(
-          border:isDrawerOpen? Border.all(color: Colors.black,width: 3):Border.all(color: Theme.of(context).primaryColor),
+          border:isDrawerOpen? Border.all(color: Colors.black,width: 2):Border.all(color: Theme.of(context).primaryColor),
           color: Colors.yellow[50],
           borderRadius: BorderRadius.circular(40)
         ),
