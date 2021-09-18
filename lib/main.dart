@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_original/Screens/drawer.dart';
+import 'package:todo_original/Screens/games.dart';
+import 'package:todo_original/Screens/home.dart';
+import 'package:todo_original/Screens/plus.dart';
 
 import 'HomePage/homepage.dart';
 import 'Models/Providers/TodoModel.dart';
@@ -26,6 +29,10 @@ class MyApp extends StatelessWidget {
         child: 
           MyHomePage(),
         ),
+        routes: {
+          '/addNew':(context)=>MyApp(),
+          Games.routeName:(context)=>Games()
+        },
     );
   }
 }

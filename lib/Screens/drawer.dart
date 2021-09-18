@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:touch_ripple_effect/touch_ripple_effect.dart';
+
 
 class DrawerScreen extends StatefulWidget {
   @override
@@ -35,8 +37,8 @@ class _DrawerScreenState extends State<DrawerScreen> {
               ),
             Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(topRight: Radius.circular(50), 
-                      topLeft: Radius.circular(60)),
+                borderRadius: BorderRadius.only(topRight: Radius.circular(25), 
+                      topLeft: Radius.circular(25)),
                 color: Colors.green[100]
               ),
               child:
@@ -44,105 +46,155 @@ class _DrawerScreenState extends State<DrawerScreen> {
                 padding: const EdgeInsets.only(left: 30),
                 child: Column(children: [
                   SizedBox(height: 15,),
-             ListTile(
-                 
-                  title: Text('Profile',style: TextStyle(
-                    
-                    fontWeight: FontWeight.bold,
-                    
-                    
-                    )),
-                  leading: Icon(FontAwesomeIcons.userAlt),
-                  onTap: (){},
-                  ),
+             TouchRippleEffect(
+                borderRadius: BorderRadius.circular(25),
+               rippleColor: Colors.grey,
+               onTap: (){
+                  Feedback.forTap(context);
+               },
+               child: ListTile(
+                   
+                    title: Text('Profile',style: TextStyle(
+                      
+                      fontWeight: FontWeight.bold,
+                      
+                      
+                      )),
+                    leading: Icon(FontAwesomeIcons.userAlt),
+                   
+                    ),
+             ),
                   Divider(),
     
                 
-                ListTile(
-                  title: Text('New Note',style: TextStyle(
+                TouchRippleEffect(
+                borderRadius: BorderRadius.circular(25),
+               rippleColor: Colors.grey,
+               onTap: (){
+                  Feedback.forTap(context);
+                  Navigator.pushNamed(context, '/addNew');
+               },
+                  child: ListTile(
+                    title: Text('New Note',style: TextStyle(
+                      
+                      fontWeight: FontWeight.bold,
+                      
+                      
+                      )),
+                    leading: Icon(FontAwesomeIcons.plusCircle),
                     
-                    fontWeight: FontWeight.bold,
-                    
-                    
-                    )),
-                  leading: Icon(FontAwesomeIcons.plusCircle),
-                  onTap: (){},
-                  ),
+                    ),
+                ),
 
                 Divider(),
            
 
 
-                ListTile(
-                  title: Text('Search',style: TextStyle(
-                    
-                    fontWeight: FontWeight.bold,
-                    
-                    
-                    )),
-                  leading: Icon(FontAwesomeIcons.search),
-                  onTap: (){},
-                  ),
+                TouchRippleEffect(
+                borderRadius: BorderRadius.circular(25),
+               rippleColor: Colors.grey,
+               onTap: (){
+                  Feedback.forTap(context);
+               },
+                  child: ListTile(
+                    title: Text('Search',style: TextStyle(
+                      
+                      fontWeight: FontWeight.bold,
+                      
+                      
+                      )),
+                    leading: Icon(FontAwesomeIcons.search),
+                  
+                    ),
+                ),
 
 
                 Divider(),
 
 
-                ListTile(
-                  title: Text('Share Note',style: TextStyle(
-                    
-                    fontWeight: FontWeight.bold,
-                    
-                    
-                    )),
-                  leading: Icon(FontAwesomeIcons.share),
-                 onTap: (){},
-                  ),
+                TouchRippleEffect(
+                borderRadius: BorderRadius.circular(25),
+               rippleColor: Colors.grey,
+               onTap: (){
+                  Feedback.forTap(context);
+               },
+                  child: ListTile(
+                    title: Text('Share Note',style: TextStyle(
+                      
+                      fontWeight: FontWeight.bold,
+                      
+                      
+                      )),
+                    leading: Icon(FontAwesomeIcons.share),
+                
+                    ),
+                ),
 
 
       
                 Divider(),
 
 
-                ListTile(
-                  title: Text('Settings',style: TextStyle(
-                    
-                    fontWeight: FontWeight.bold,
-                    
-                    
-                    )),
-                  leading: Icon(FontAwesomeIcons.tools),
-                  onTap: (){},
-                  ),
+              TouchRippleEffect(
+                borderRadius: BorderRadius.circular(25),
+               rippleColor: Colors.grey,
+               onTap: (){
+                  Feedback.forTap(context);
+               },
+                  child: ListTile(
+                    title: Text('Settings',style: TextStyle(
+                      
+                      fontWeight: FontWeight.bold,
+                      
+                      
+                      )),
+                    leading: Icon(FontAwesomeIcons.tools),
+                   
+                    ),
+                ),
 
                 Divider(),
                 
 
-                ListTile(
-                  title: Text('Support',style: TextStyle(
-                    
-                    fontWeight: FontWeight.bold,
-                    
-                    
-                    )),
-                  leading: Icon(Icons.report_problem),
-                  onTap: (){},
-                  ),
+                TouchRippleEffect(
+                borderRadius: BorderRadius.circular(25),
+               rippleColor: Colors.grey,
+               onTap: (){
+                  Feedback.forTap(context);
+               },
+                  child: ListTile(
+                    title: Text('Support',style: TextStyle(
+                      
+                      fontWeight: FontWeight.bold,
+                      
+                      
+                      )),
+                    leading: Icon(Icons.report_problem),
+                 
+                    ),
+                ),
 
       
                 Divider(),
 
-                ListTile(
-                  title: Text('Close',style: TextStyle(
+               TouchRippleEffect(
+                borderRadius: BorderRadius.circular(25),
+               rippleColor: Colors.grey,
+               onTap: (){
+                  Feedback.forTap(context);
+                  Navigator.of(context).pop();
+               },
+                  child: ListTile(
+                    title: Text('Close',style: TextStyle(
+                      
+                      fontWeight: FontWeight.bold,
+                      
+                      
+                      )),
+                    leading: Icon(FontAwesomeIcons.windowClose),
                     
-                    fontWeight: FontWeight.bold,
-                    
-                    
-                    )),
-                  leading: Icon(FontAwesomeIcons.windowClose),
-                  onTap: (){
-                    Navigator.of(context).pop();}
-                  ),
+                    ),
+                ),
           ],
           ),
               ),

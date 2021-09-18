@@ -66,7 +66,7 @@ Widget build(BuildContext context) {
         duration: Duration(milliseconds: 250),
         child: ClipRRect(borderRadius: BorderRadius.circular(isDrawerOpen? 40:0.0),
           child: Scaffold(
-            backgroundColor: Colors.lightBlue[700],
+            backgroundColor: Colors.lightBlue[400],
             appBar: AppBar(
               backgroundColor: Colors.transparent,
               elevation: 0,
@@ -115,7 +115,7 @@ Widget build(BuildContext context) {
                   ), 
                   Expanded(
                     child:ClipRRect(
-                    borderRadius: BorderRadius.only(topLeft: Radius.circular(50),topRight: Radius.circular(50)),
+                    borderRadius: BorderRadius.only(topLeft: Radius.circular(25),topRight: Radius.circular(25)),
                       child: Scaffold(
                        backgroundColor: Colors.green[100],
                         body: Consumer<TodoModel>(
@@ -144,6 +144,7 @@ Widget build(BuildContext context) {
                                             fontWeight: FontWeight.bold),),
                                           
                                         trailing:   Container(
+                                          padding: EdgeInsets.only(left: 20),
                                           decoration: BoxDecoration(border: Border(left: BorderSide(
                                             
                                             color: Colors.black
