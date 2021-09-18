@@ -75,7 +75,25 @@ class _DrawerScreenState extends State<DrawerScreen> {
                   Feedback.forTap(context);
                   //Navigator.pushNamed(context, '/addNew');
                   Navigator.of(context).push( MaterialPageRoute(builder: 
-                   (context) => MyApp()));
+                   (context) => Scaffold(
+                     body: Padding(
+                       padding: const EdgeInsets.only(top: 180),
+                       child: Column(
+                          children: [
+                            MyApp(),
+                            SizedBox(
+                              height: 25,
+                            ),
+                            IconButton(icon: Card(
+                              elevation: 20,
+                              color: Colors.grey,
+                              shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(30.0),
+  ),
+                              child: Center(child: Icon(FontAwesomeIcons.chevronCircleLeft))), onPressed: (){})
+                          ],
+                       ),
+                     ),)));
                },
                   child: ListTile(
                     title: Text('New Note',style: TextStyle(

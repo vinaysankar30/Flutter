@@ -35,8 +35,8 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
   
-    return  Scaffold(
-      body: Center(
+    return  Container(
+      child: Center(
           child: Card(
             elevation: 10,
             color: Colors.yellow[50],
