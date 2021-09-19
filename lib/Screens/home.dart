@@ -134,7 +134,7 @@ Widget build(BuildContext context) {
                                     background: slideRightBackground(),
                                     secondaryBackground: slideLeftBackground(),
                                     key: Key(item.toString()),
-                                    //onDismissed: (){},
+                                    
                                     child: Column(children: [
                                       SizedBox(height: 10,),
                                       Card(
