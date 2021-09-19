@@ -17,22 +17,28 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
   
-    return MaterialApp(
+    return ChangeNotifierProvider(
+        create: (context) => TodoModel(),
+        child:MaterialApp(
+          
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(
-        backgroundColor: Colors.black12,
-        primarySwatch: Colors.blue,
-      ),
-      home: ChangeNotifierProvider(
-        create: (context) => TodoModel(),
-        child: 
-          MyHomePage(),
-        ),
-        routes: {
+      routes:{
+          '/home':(context)=>Home(),
           '/addNew':(context)=>MyApp(),
           Games.routeName:(context)=>Games()
         },
+      theme: ThemeData(
+        backgroundColor: Colors.black12,
+        primarySwatch: Colors.blue,
+        
+        
+      ),
+      home: MyHomePage(),
+        ),
+        
+        
     );
+    
   }
 }
