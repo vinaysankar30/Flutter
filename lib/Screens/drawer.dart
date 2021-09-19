@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:todo_original/Screens/plus.dart';
 import 'package:touch_ripple_effect/touch_ripple_effect.dart';
 
@@ -13,10 +14,10 @@ class _DrawerScreenState extends State<DrawerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightBlue[700],
+      backgroundColor: HexColor('008080'),
       body: ListView(
         
-          padding: EdgeInsets.all(0.0),
+
           children: <Widget>[
               InkWell(
                 onTap:(){} ,
@@ -30,89 +31,41 @@ class _DrawerScreenState extends State<DrawerScreen> {
 
 
                   decoration: BoxDecoration(
-                    color: Colors.lightBlue[700],
-                  // image: DecorationImage(
-                    // image: AssetImage("assets/fundo.jpg"),
-                      //  fit: BoxFit.cover)
+                    color: HexColor('008080'),
+                  
                 ),),
               ),
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(topRight: Radius.circular(25), 
-                      topLeft: Radius.circular(25)),
-                color: Colors.green[100]
-              ),
-              child:
+            // Container(
+            //   decoration: BoxDecoration(
+            //     borderRadius: BorderRadius.only(topRight: Radius.circular(25), 
+            //           topLeft: Radius.circular(25)),
+            //     color: Colors.green[100]
+            //   ),
+            //   child:
               Padding(
-                padding: const EdgeInsets.only(left: 30),
+                padding: const EdgeInsets.only(left:5 ),
                 child: Column(children: [
-                  SizedBox(height: 15,),
+                  SizedBox(height: 13,),
              TouchRippleEffect(
                 borderRadius: BorderRadius.circular(25),
-               rippleColor: Colors.grey,
+               rippleColor: Colors.green,
                onTap: (){
                   Feedback.forTap(context);
                },
                child: ListTile(
                    
                     title: Text('Profile',style: TextStyle(
+                      color: Colors.white,
                       
                       fontWeight: FontWeight.bold,
                       
                       
                       )),
-                    leading: Icon(FontAwesomeIcons.userAlt),
+                    leading: Icon(FontAwesomeIcons.userAlt,color: Colors.white,),
                    
                     ),
              ),
-                  Divider(),
-    
-                
-                TouchRippleEffect(
-                borderRadius: BorderRadius.circular(25),
-               rippleColor: Colors.grey,
-               onTap: (){
-                  Feedback.forTap(context);
-                  //Navigator.pushNamed(context, '/addNew');
-                  Navigator.of(context).push( MaterialPageRoute(builder: 
-                   (context) => MyApp()));
-               },
-                  child: ListTile(
-                    title: Text('New Note',style: TextStyle(
-                      
-                      fontWeight: FontWeight.bold,
-                      
-                      
-                      )),
-                    leading: Icon(FontAwesomeIcons.plusCircle),
-                    
-                    ),
-                ),
 
-                Divider(),
-           
-
-
-                TouchRippleEffect(
-                borderRadius: BorderRadius.circular(25),
-               rippleColor: Colors.grey,
-               onTap: (){
-                  Feedback.forTap(context);
-               },
-                  child: ListTile(
-                    title: Text('Search',style: TextStyle(
-                      
-                      fontWeight: FontWeight.bold,
-                      
-                      
-                      )),
-                    leading: Icon(FontAwesomeIcons.search),
-                  
-                    ),
-                ),
-
-
-                Divider(),
 
 
                 TouchRippleEffect(
@@ -123,19 +76,18 @@ class _DrawerScreenState extends State<DrawerScreen> {
                },
                   child: ListTile(
                     title: Text('Share Note',style: TextStyle(
-                      
+                      color: Colors.white,
                       fontWeight: FontWeight.bold,
                       
                       
                       )),
-                    leading: Icon(FontAwesomeIcons.share),
+                    leading: Icon(FontAwesomeIcons.share,color: Colors.white),
                 
                     ),
                 ),
 
 
-      
-                Divider(),
+
 
 
               TouchRippleEffect(
@@ -146,18 +98,17 @@ class _DrawerScreenState extends State<DrawerScreen> {
                },
                   child: ListTile(
                     title: Text('Settings',style: TextStyle(
-                      
+                      color: Colors.white,
                       fontWeight: FontWeight.bold,
                       
                       
                       )),
-                    leading: Icon(FontAwesomeIcons.tools),
+                    leading: Icon(FontAwesomeIcons.tools,color: Colors.white),
                    
                     ),
                 ),
 
-                Divider(),
-                
+      
 
                 TouchRippleEffect(
                 borderRadius: BorderRadius.circular(25),
@@ -166,19 +117,19 @@ class _DrawerScreenState extends State<DrawerScreen> {
                   Feedback.forTap(context);
                },
                   child: ListTile(
-                    title: Text('Support',style: TextStyle(
-                      
+                    title: Text('About Us',style: TextStyle(
+                      color: Colors.white,
                       fontWeight: FontWeight.bold,
                       
                       
                       )),
-                    leading: Icon(Icons.report_problem),
+                    leading: Icon(Icons.people,color: Colors.white),
                  
                     ),
                 ),
 
       
-                Divider(),
+          
 
                TouchRippleEffect(
                 borderRadius: BorderRadius.circular(25),
@@ -189,19 +140,40 @@ class _DrawerScreenState extends State<DrawerScreen> {
                },
                   child: ListTile(
                     title: Text('Close',style: TextStyle(
-                      
+                      color: Colors.white,
                       fontWeight: FontWeight.bold,
                       
                       
                       )),
-                    leading: Icon(FontAwesomeIcons.windowClose),
+                    leading: Icon(FontAwesomeIcons.windowClose,color: Colors.white),
+                    
+                    ),
+                ),
+
+
+
+               TouchRippleEffect(
+                borderRadius: BorderRadius.circular(25),
+               rippleColor: Colors.grey,
+               onTap: (){
+                  Feedback.forTap(context);
+                  Navigator.of(context).pop();
+               },
+                  child: ListTile(
+                    title: Text('Report a Bug',style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      
+                      
+                      )),
+                    leading: Icon(FontAwesomeIcons.bug,color: Colors.white),
                     
                     ),
                 ),
           ],
           ),
               ),
-          ),
+
           ],
         ),
       );

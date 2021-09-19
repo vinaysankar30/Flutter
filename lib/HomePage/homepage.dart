@@ -1,5 +1,6 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 import '../Screens/home.dart';
 import '../Screens/plus.dart';
 import '../Screens/games.dart';
@@ -22,14 +23,15 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       body:listWidgets[selectedpage],
       bottomNavigationBar: ConvexAppBar(
-        style: TabStyle.fixedCircle,
+        style: TabStyle.textIn,
+        backgroundColor: HexColor('#167D7F'),
         items: [
-          TabItem(icon: Icons.home),
-          TabItem(icon: Icons.add),
-          TabItem(icon: Icons.search)
+          TabItem(icon: Icons.home,title: 'Home'),
+          TabItem(icon: Icons.add,title: 'New'),
+          TabItem(icon: Icons.search,title:'Search')
         ],
-        activeColor: Colors.yellow[50],
-        initialActiveIndex: 1,
+        activeColor: Colors.white,
+        initialActiveIndex: 0,
         onTap: (int i){
           setState(() {
            selectedpage = i;  

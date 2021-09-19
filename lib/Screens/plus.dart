@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_original/Models/Providers/TodoModel.dart';
@@ -37,12 +38,12 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
   
     return  Scaffold(
-      backgroundColor: Colors.green[100],
+      backgroundColor: HexColor('#98D7C2'),
       body: Container(
         child: Center(
             child: Card(
               elevation: 10,
-              color: Colors.yellow[50],
+              color: HexColor('#DDFFE7'),
                     shape: RoundedRectangleBorder(
                       
                         borderRadius: BorderRadius.all(Radius.circular(32.0))),
@@ -56,13 +57,9 @@ class _MyAppState extends State<MyApp> {
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
-                              Stack(
-                                  children: [
-                                    Positioned(
-                                      left: 3,
-                                      child: IconButton(icon: Icon(FontAwesomeIcons.chevronLeft), onPressed: (){
-                                        Navigator.of(context).pop();
-                                      })),
+                             
+                                  
+                    
                                    Padding(
                                      padding: const EdgeInsets.only(left: 75,right: 75),
                                      child: Container(
@@ -71,12 +68,12 @@ class _MyAppState extends State<MyApp> {
                                       decoration: InputDecoration
                                        (hintText:'Enter Activity Name',
                                        border: InputBorder.none
-                                      ),
+                                  
                                       
                                   ),
                             ),
                                    ),
-                                   ] ),
+                                   ),
                             SizedBox(
                               height: 5.0,
                             ),
@@ -89,7 +86,7 @@ class _MyAppState extends State<MyApp> {
                               child: TextField(
                                 controller: contentController,
                                 decoration: InputDecoration(
-                                  hintText: "Add Review",
+                                  hintText: "Content",
                                   border: InputBorder.none,
                                 ),
                                 maxLines: 10,
@@ -116,14 +113,14 @@ class _MyAppState extends State<MyApp> {
                                 padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
                                 decoration: BoxDecoration(
                                   
-                                  color: Colors.blue,
+                                  color: HexColor('#29A0B1'),
                                   borderRadius: BorderRadius.only(
                                       bottomLeft: Radius.circular(32.0),
                                       bottomRight: Radius.circular(32.0)),
                                 ),
                                 child: Text(
                                   "Submit",
-                                  style: TextStyle(color: Colors.white),
+                                  style: TextStyle(color: Colors.black),
                                   textAlign: TextAlign.center,
                                 ),
                               ),

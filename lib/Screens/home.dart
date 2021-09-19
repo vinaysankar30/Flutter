@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_original/Models/Providers/TodoModel.dart';
 import 'package:intl/intl.dart';
@@ -66,7 +67,7 @@ Widget build(BuildContext context) {
         duration: Duration(milliseconds: 250),
         child: ClipRRect(borderRadius: BorderRadius.circular(isDrawerOpen? 40:0.0),
           child: Scaffold(
-            backgroundColor: Colors.lightBlue[400],
+            backgroundColor: HexColor('#008080'),
             appBar: AppBar(
               backgroundColor: Colors.transparent,
               elevation: 0,
@@ -117,7 +118,7 @@ Widget build(BuildContext context) {
                     child:ClipRRect(
                     borderRadius: BorderRadius.only(topLeft: Radius.circular(25),topRight: Radius.circular(25)),
                       child: Scaffold(
-                       backgroundColor: Colors.green[100],
+                       backgroundColor: HexColor('#98D7C2'),
                         body: Consumer<TodoModel>(
                           builder: (context, todo, child){
                             return _isLoading? Center(child: 
@@ -130,7 +131,7 @@ Widget build(BuildContext context) {
                                     SizedBox(height: 10,),
                                     Card(
                                       elevation: 10,
-                                      color: Colors.yellow[50],
+                                      color: HexColor('#DDFFE7'),
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(20)
 
