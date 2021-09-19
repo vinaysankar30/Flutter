@@ -2,6 +2,7 @@ import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_original/Models/Providers/TodoModel.dart';
@@ -36,6 +37,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
   
     return  Scaffold(
+      backgroundColor: Colors.green[100],
       body: Container(
         child: Center(
             child: Card(
@@ -54,20 +56,27 @@ class _MyAppState extends State<MyApp> {
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
-                              Padding(
-                                padding: const EdgeInsets.only(left: 75,right: 75),
-                                child: Container(
-                                  
-                                child: TextField(
-                                  controller: nameController,
-                                  decoration: InputDecoration
-                                   (hintText:'Enter Activity Name',
-                                   border: InputBorder.none
+                              Stack(
+                                  children: [
+                                    Positioned(
+                                      left: 3,
+                                      child: IconButton(icon: Icon(FontAwesomeIcons.chevronLeft), onPressed: (){
+                                        Navigator.of(context).pop();
+                                      })),
+                                   Padding(
+                                     padding: const EdgeInsets.only(left: 75,right: 75),
+                                     child: Container(
+                                      child: TextField(
+                                      controller: nameController,
+                                      decoration: InputDecoration
+                                       (hintText:'Enter Activity Name',
+                                       border: InputBorder.none
+                                      ),
+                                      
                                   ),
-                                  
-                                ),
                             ),
-                              ),
+                                   ),
+                                   ] ),
                             SizedBox(
                               height: 5.0,
                             ),
