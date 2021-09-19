@@ -5,6 +5,8 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_original/Models/Providers/TodoModel.dart';
 import 'package:intl/intl.dart';
+import 'package:todo_original/Models/swipeleft.dart';
+import 'package:todo_original/Models/swiperight.dart';
 import 'package:todo_original/Screens/drawer.dart';
 class Home extends StatefulWidget{
  
@@ -127,47 +129,54 @@ Widget build(BuildContext context) {
                             :ListView.builder(
                                 itemCount: todo.tasklist.length,
                                 itemBuilder: (context, index){
-                                  return Column(children: [
-                                    SizedBox(height: 10,),
-                                    Card(
-                                      elevation: 10,
-                                      color: HexColor('#DDFFE7'),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(20)
+                                  final item = todo.tasklist;
+                                  return Dismissible(
+                                    background: slideRightBackground(),
+                                    secondaryBackground: slideLeftBackground(),
+                                    key: Key(item.toString()),
+                                    //onDismissed: (){},
+                                    child: Column(children: [
+                                      SizedBox(height: 10,),
+                                      Card(
+                                        elevation: 10,
+                                        color: HexColor('#DDFFE7'),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(20)
 
-                                      ),
-                                      child: ListTile(
-                                        onTap: (){},
-                                        contentPadding: EdgeInsets.only(left: 32, right: 32, top: 8, bottom: 8),
-                                        title: Text(todo.tasklist[index].title, style : TextStyle(color: Colors.black87,
-                                            fontWeight: FontWeight.bold),),
-                                        subtitle: Text(todo.tasklist[index].detail, style: TextStyle(color: Colors.black45,
-                                            fontWeight: FontWeight.bold),),
-                                          
-                                        trailing:   Container(
-                                          padding: EdgeInsets.only(left: 20),
-                                          decoration: BoxDecoration(border: Border(left: BorderSide(
+                                        ),
+                                        child: ListTile(
+                                          onTap: (){},
+                                          contentPadding: EdgeInsets.only(left: 32, right: 32, top: 8, bottom: 8),
+                                          title: Text(todo.tasklist[index].title, style : TextStyle(color: Colors.black87,
+                                              fontWeight: FontWeight.bold),),
+                                          subtitle: Text(todo.tasklist[index].detail, style: TextStyle(color: Colors.black45,
+                                              fontWeight: FontWeight.bold),),
                                             
-                                            color: Colors.black
-
-                                          ))),
-                                          child: Column(
-                                            children: [
+                                          trailing:   Container(
+                                            padding: EdgeInsets.only(left: 20),
+                                            decoration: BoxDecoration(border: Border(left: BorderSide(
                                               
-                                               Icon(Icons.check_circle, color: Colors.greenAccent,),
-                                               SizedBox(
-                                                 height: 14,
-                                               ),
-                                              Text(todo.tasklist[index].date, style : TextStyle(color: Colors.black,
-                                              fontWeight: FontWeight.bold,fontSize: 8),),
-                                              Text(todo.tasklist[index].time, style : TextStyle(color: Colors.black,
-                                              fontWeight: FontWeight.bold,fontSize: 8),),
-                                            ],
+                                              color: Colors.black
+
+                                            ))),
+                                            child: Column(
+                                              children: [
+                                                
+                                                 Icon(Icons.check_circle, color: Colors.greenAccent,),
+                                                 SizedBox(
+                                                   height: 14,
+                                                 ),
+                                                Text(todo.tasklist[index].date, style : TextStyle(color: Colors.black,
+                                                fontWeight: FontWeight.bold,fontSize: 8),),
+                                                Text(todo.tasklist[index].time, style : TextStyle(color: Colors.black,
+                                                fontWeight: FontWeight.bold,fontSize: 8),),
+                                              ],
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      margin: EdgeInsets.only(bottom: 8, left: 16, right: 16),
-                                    ),]
+                                        margin: EdgeInsets.only(bottom: 8, left: 16, right: 16),
+                                      ),]
+                                    ),
                                   );
                                 }
                             );
