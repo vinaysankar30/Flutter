@@ -5,6 +5,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_original/Models/Providers/TodoModel.dart';
 import 'package:intl/intl.dart';
+import 'package:todo_original/Models/TaskModel.dart';
 import 'package:todo_original/Models/swipeleft.dart';
 import 'package:todo_original/Models/swiperight.dart';
 import 'package:todo_original/Screens/drawer.dart';
@@ -15,7 +16,6 @@ class Home extends StatefulWidget{
 }
 
 class _HomeState extends State<Home> {
-  
   double xOffset = 0;
   double yOffset = 0;
   double scaleFactor = 1;
@@ -95,7 +95,14 @@ Widget build(BuildContext context) {
                       });
                },),
             ),
-            body: RefreshIndicator( onRefresh: ()=>_refresh(context).then((_) => ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: const Text("Updated")))),
+            body: RefreshIndicator( onRefresh: ()=>_refresh(context).then((_) => 
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Padding(
+              padding: const EdgeInsets.only(left: 141),
+              child: const Text("Updated"),
+            )
+            )
+            )
+            ),
             
               child: Column(
                 children: <Widget>[
@@ -134,7 +141,6 @@ Widget build(BuildContext context) {
                                     background: slideRightBackground(),
                                     secondaryBackground: slideLeftBackground(),
                                     key: Key(item.toString()),
-                                    
                                     child: Column(children: [
                                       SizedBox(height: 10,),
                                       Card(
@@ -177,7 +183,68 @@ Widget build(BuildContext context) {
                                         margin: EdgeInsets.only(bottom: 8, left: 16, right: 16),
                                       ),]
                                     ),
-                                  );
+                                    // ignore: missing_return
+                                    confirmDismiss: (direction) async {
+                                      if (direction == DismissDirection.endToStart) {
+                                      
+                                            final bool res = await showDialog(
+                                              context: context,
+                                          builder: (BuildContext context) {
+                                                  return AlertDialog(
+                                                    backgroundColor: HexColor('#DDFFE7'),
+                                                    shape: RoundedRectangleBorder(
+                                                      borderRadius: BorderRadius.all(Radius.circular(25))
+                                                    ),
+                                          content: Container(
+                                            height: 50,
+                                            child: Column(
+                                              children: [
+                                               Text(
+                                              "Are you sure you want to delete :",style: TextStyle(fontSize:18),),
+                                              Text("${todo.tasklist[index].title}?",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 22),)
+                                              ]),
+                                          ),
+                                               actions: <Widget>[
+                               // ignore: deprecated_member_use
+                               FlatButton(
+                          child: Text(
+                            "Cancel",
+                            style: TextStyle(color: Colors.black,fontSize: 16),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                        // ignore: deprecated_member_use
+                        FlatButton(
+                          child: Text(
+                            "Delete",
+                            style: TextStyle(color: Colors.red,fontSize: 16),
+                          ),
+                          onPressed: (
+                            
+                          ) {
+                          
+                            setState(() {
+                              item.removeAt(index);
+                              // Provider.of<TodoModel>(context,listen: false).deleteSet(
+                              //   TaskModel(
+                              //     title: todo.tasklist[index].title,
+                              //     detail: todo.tasklist[index].detail,                                 
+                              //     date:todo.tasklist[index].date ,
+                              //     time:todo.tasklist[index].time)
+                              // );
+                            }
+                            );
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
+                    );
+                  });
+              return res;
+            } else {}
+                                    });
                                 }
                             );
                           },

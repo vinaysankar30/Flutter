@@ -93,7 +93,9 @@ class _MyAppState extends State<MyApp> {
                               ),
                             ),
                             GestureDetector(
-                              onTap:(){Provider.of<TodoModel>(context,listen: false).
+                              onTap:(){
+                                 Feedback.forTap(context);
+                                Provider.of<TodoModel>(context,listen: false).
                               
                               addTaskInList(
                                 TaskModel(title:nameController.text.toString(),
@@ -103,6 +105,7 @@ class _MyAppState extends State<MyApp> {
                                 
                                 )
                                 );
+
                               ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                               content: Text('saved'),
                               ));

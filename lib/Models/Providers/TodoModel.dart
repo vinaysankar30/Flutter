@@ -24,6 +24,7 @@ class TodoModel extends ChangeNotifier{
     var url = Uri.parse('https://todoapp-72f66-default-rtdb.firebaseio.com/mynotes.json');
     final response = await http.get(url);
     final extractedData = jsonDecode(response.body) as Map<String,dynamic>;
+    print(extractedData);
     final List<TaskModel>loaded = [];
     extractedData.forEach((key, value) {
       loaded.add(TaskModel(
@@ -37,6 +38,18 @@ class TodoModel extends ChangeNotifier{
     tasklist = loaded;
     notifyListeners();
    
+    
+  }
+  Future<http.Response> deleteSet(TaskModel newTask) async{
+    final http.Response response = await http.delete(
+      Uri.parse('https://todoapp-72f66-default-rtdb.firebaseio.com/mynotes.json'),
+      headers: <String,String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      }
+      
+    )
+    
+    ;
     
   }
 }
