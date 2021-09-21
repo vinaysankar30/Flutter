@@ -201,7 +201,7 @@ Widget build(BuildContext context) {
                                               children: [
                                                Text(
                                               "Are you sure you want to delete :",style: TextStyle(fontSize:18),),
-                                              Text("${todo.tasklist[index].title}?",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 22),)
+                                              Text("${todo.tasklist[index].title}?",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 22),overflow: TextOverflow.ellipsis,)
                                               ]),
                                           ),
                                                actions: <Widget>[
@@ -227,13 +227,8 @@ Widget build(BuildContext context) {
                           
                             setState(() {
                               item.removeAt(index);
-                              // Provider.of<TodoModel>(context,listen: false).deleteSet(
-                              //   TaskModel(
-                              //     title: todo.tasklist[index].title,
-                              //     detail: todo.tasklist[index].detail,                                 
-                              //     date:todo.tasklist[index].date ,
-                              //     time:todo.tasklist[index].time)
-                              // );
+                             Provider.of<TodoModel>(context,listen: false).deleteContent(todo.tasklist[index].id);
+                             
                             }
                             );
                             Navigator.of(context).pop();

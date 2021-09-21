@@ -8,6 +8,7 @@ import 'dart:convert';
 
 class TodoModel extends ChangeNotifier{
   List tasklist = [];
+  
   Future<void> addTaskInList(TaskModel taskModel) async {
   var url = Uri.parse('https://todoapp-72f66-default-rtdb.firebaseio.com/mynotes.json');
 // .then((value) => tasklist.add(taskModel)
@@ -16,9 +17,11 @@ class TodoModel extends ChangeNotifier{
       'detail':taskModel.detail,
       'time':taskModel.time,
       'date':taskModel.date,
-    }),);
+    })
+    );
     
       notifyListeners();
+      
   }
   Future<void> fetchandSet() async{
     var url = Uri.parse('https://todoapp-72f66-default-rtdb.firebaseio.com/mynotes.json');
@@ -31,7 +34,8 @@ class TodoModel extends ChangeNotifier{
         title: value['title'],
         detail: value['detail'],
         time: value['time'],
-        date: value['date']
+        date: value['date'],
+        id:key
       )
         );
     });
@@ -40,16 +44,16 @@ class TodoModel extends ChangeNotifier{
    
     
   }
-  Future<http.Response> deleteSet(TaskModel newTask) async{
-    final http.Response response = await http.delete(
-      Uri.parse('https://todoapp-72f66-default-rtdb.firebaseio.com/mynotes.json'),
-      headers: <String,String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      }
-      
-    )
+  Future<void> deleteContent(String id) async {
+  final http.Response response = await http.delete(
+    Uri.parse('https://todoapp-72f66-default-rtdb.firebaseio.com/mynotes/$id.json'),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
     
-    ;
-    
-  }
+  );
+ notifyListeners();
+  
+  
+}
 }

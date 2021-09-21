@@ -94,6 +94,7 @@ class _MyAppState extends State<MyApp> {
                             ),
                             GestureDetector(
                               onTap:(){
+                                
                                  Feedback.forTap(context);
                                 Provider.of<TodoModel>(context,listen: false).
                               
@@ -104,7 +105,7 @@ class _MyAppState extends State<MyApp> {
                                 date:date()
                                 
                                 )
-                                );
+                                ).then((value) => Provider.of(context,listen: false).clearText());
 
                               ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                               content: Text('saved'),
