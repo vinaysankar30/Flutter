@@ -5,7 +5,6 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_original/Models/Providers/TodoModel.dart';
 import 'package:intl/intl.dart';
-import 'package:todo_original/Models/TaskModel.dart';
 import 'package:todo_original/Models/swipeleft.dart';
 import 'package:todo_original/Models/swiperight.dart';
 import 'package:todo_original/Screens/drawer.dart';
@@ -16,13 +15,16 @@ class Home extends StatefulWidget{
 }
 
 class _HomeState extends State<Home> {
-  double xOffset = 0;
+  TextEditingController UpdatenameController = TextEditingController();
+  TextEditingController UpdatecontentController = TextEditingController();
+   double xOffset = 0;
   double yOffset = 0;
   double scaleFactor = 1;
   bool isDrawerOpen = false;
   String _timeString;
   String _date;
   var _isLoading = true;
+  final _formKey = GlobalKey<FormState>(); 
 @override
 void initState() {
     Provider.of<TodoModel>(context,listen: false).fetchandSet().then((_) => {
@@ -53,7 +55,12 @@ void _getTime() {
   Future<void> _refresh(BuildContext context) async{
     await Provider.of<TodoModel>(context,listen: false).fetchandSet();
   }
-
+_Message(){
+  return  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Padding(
+              padding: const EdgeInsets.only(left: 141),
+              child: const Text("Updated"),
+            )));
+}
 Widget build(BuildContext context) {
 
     // TODO: implement build
@@ -96,12 +103,7 @@ Widget build(BuildContext context) {
                },),
             ),
             body: RefreshIndicator( onRefresh: ()=>_refresh(context).then((_) => 
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Padding(
-              padding: const EdgeInsets.only(left: 141),
-              child: const Text("Updated"),
-            )
-            )
-            )
+           _Message()
             ),
             
               child: Column(
@@ -134,7 +136,7 @@ Widget build(BuildContext context) {
                             CircularProgressIndicator(backgroundColor: Colors.black12,)
                             )
                             :ListView.builder(
-                                itemCount: todo.tasklist.length,
+                                itemCount:todo.tasklist.length-1,
                                 itemBuilder: (context, index){
                                   final item = todo.tasklist;
                                   return Dismissible(
@@ -228,6 +230,11 @@ Widget build(BuildContext context) {
                             setState(() {
                               item.removeAt(index);
                              Provider.of<TodoModel>(context,listen: false).deleteContent(todo.tasklist[index].id);
+                                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                                content: Padding(
+                                  padding: const EdgeInsets.only(left: 141),
+                                  child: Text('deleted'),
+                                )));
                              
                             }
                             );
@@ -238,7 +245,135 @@ Widget build(BuildContext context) {
                     );
                   });
               return res;
-            } else {}
+            } else {
+              await showDialog(
+                
+                context: context,
+                builder: (BuildContext context) {
+              return AlertDialog(
+                backgroundColor: Colors.transparent,
+                insetPadding: EdgeInsets.all(50),
+                contentPadding: EdgeInsets.zero,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(32),bottomLeft: Radius.circular(32),bottomRight: Radius.circular(32))),
+
+                    content: Stack(
+                      clipBehavior: Clip.none, children: <Widget>[
+                        Card(
+              elevation: 10,
+              color: HexColor('#DDFFE7'),
+                    shape: RoundedRectangleBorder(
+                      
+                        borderRadius: BorderRadius.only(topLeft: Radius.circular(32),bottomLeft: Radius.circular(32),bottomRight: Radius.circular(32))),
+                    
+                    child:Container(
+                        
+                        width: 500,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                             
+                                  
+                    
+                                   Padding(
+                                     padding: const EdgeInsets.only(left: 75,right: 75),
+                                     child: Container(
+                                      child: TextFormField(
+                                        validator: (value) {
+                                               if (value == null || value.isEmpty) {
+                                                    return 'Please enter name';
+                                                 }
+                                                         return null;
+                                                  },
+                                        initialValue: todo.tasklist[index].title,
+                                      decoration: InputDecoration
+                                       (
+                                       border: InputBorder.none
+                                  
+                                      
+                                  ),
+                            ),
+                                   ),
+                                   ),
+                            SizedBox(
+                              height: 5.0,
+                            ),
+                            Divider(
+                              color: Colors.grey,
+                              height: 4.0,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 30.0, right: 30.0),
+                              child: TextFormField(
+                                validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                    return 'Please enter name';
+                                }
+                                    return null;
+                                },
+                                initialValue: todo.tasklist[index].detail,
+                                decoration: InputDecoration(
+                                  
+                                  border: InputBorder.none,
+                                ),
+                                maxLines: 10,
+                                
+                              ),
+                              
+                            ),
+                            GestureDetector(
+                              onTap:(){
+                                
+                                 Feedback.forTap(context);
+                                
+                              _Message();
+                              
+                              },
+                              
+                              child: Container(
+                                
+                                padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
+                                decoration: BoxDecoration(
+                                  
+                                  color: HexColor('#29A0B1'),
+                                  borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(32.0),
+                                      bottomRight: Radius.circular(32.0)),
+                                ),
+                                child: Text(
+                                  "Submit",
+                                  style: TextStyle(color: Colors.black),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                          right: -5.0,
+                          top: -10.0,
+                          child: InkResponse(
+                            onTap: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: CircleAvatar(
+                              child: Icon(Icons.close),
+                              backgroundColor: Colors.red,
+                            ),
+                          ),
+                        ),
+            
+                    ],
+                    ),
+                  );
+
+                                          });
+
+
+            }
                                     });
                                 }
                             );
