@@ -55,13 +55,11 @@ class TodoModel extends ChangeNotifier{
   
 }
 
-Future<void> UpdateTaskInList(String id,TaskModel taskModel) async {
+Future<void> updateTaskInList(String id,TaskModel taskModel) async {
   var url = Uri.parse('https://todoapp-72f66-default-rtdb.firebaseio.com/mynotes/$id.json');
-   http.post(url,body:jsonEncode({
+   await http.patch(url,body:jsonEncode({
       'title':taskModel.title,
       'detail':taskModel.detail,
-      'time':taskModel.time,
-      'date':taskModel.date,
     })
     );
     

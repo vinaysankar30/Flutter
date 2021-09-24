@@ -5,6 +5,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_original/Models/Providers/TodoModel.dart';
 import 'package:intl/intl.dart';
+import 'package:todo_original/Models/TaskModel.dart';
 import 'package:todo_original/Models/swipeleft.dart';
 import 'package:todo_original/Models/swiperight.dart';
 import 'package:todo_original/Screens/drawer.dart';
@@ -15,8 +16,7 @@ class Home extends StatefulWidget{
 }
 
 class _HomeState extends State<Home> {
-  TextEditingController UpdatenameController = TextEditingController();
-  TextEditingController UpdatecontentController = TextEditingController();
+  
    double xOffset = 0;
   double yOffset = 0;
   double scaleFactor = 1;
@@ -55,7 +55,7 @@ void _getTime() {
   Future<void> _refresh(BuildContext context) async{
     await Provider.of<TodoModel>(context,listen: false).fetchandSet();
   }
-_Message(){
+_message(){
   return  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Padding(
               padding: const EdgeInsets.only(left: 141),
               child: const Text("Updated"),
@@ -103,7 +103,7 @@ Widget build(BuildContext context) {
                },),
             ),
             body: RefreshIndicator( onRefresh: ()=>_refresh(context).then((_) => 
-           _Message()
+           _message()
             ),
             
               child: Column(
@@ -136,8 +136,10 @@ Widget build(BuildContext context) {
                             CircularProgressIndicator(backgroundColor: Colors.black12,)
                             )
                             :ListView.builder(
-                                itemCount:todo.tasklist.length-1,
+                                itemCount:todo.tasklist.length.compareTo(0),
                                 itemBuilder: (context, index){
+                                  TextEditingController updatenameController = TextEditingController(text: todo.tasklist[index].title);
+                                  TextEditingController updatecontentController = TextEditingController(text: todo.tasklist[index].detail);
                                   final item = todo.tasklist;
                                   return Dismissible(
                                     background: slideRightBackground(),
@@ -265,92 +267,106 @@ Widget build(BuildContext context) {
                       
                         borderRadius: BorderRadius.only(topLeft: Radius.circular(32),bottomLeft: Radius.circular(32),bottomRight: Radius.circular(32))),
                     
-                    child:Container(
-                        
-                        width: 500,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                             
-                                  
-                    
-                                   Padding(
-                                     padding: const EdgeInsets.only(left: 75,right: 75),
-                                     child: Container(
-                                      child: TextFormField(
-                                        validator: (value) {
-                                               if (value == null || value.isEmpty) {
-                                                    return 'Please enter name';
-                                                 }
-                                                         return null;
-                                                  },
-                                        initialValue: todo.tasklist[index].title,
-                                      decoration: InputDecoration
-                                       (
-                                       border: InputBorder.none
-                                  
-                                      
+                    child:Form(
+                      child: Container(
+                        key: _formKey,
+                          
+                          width: 500,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                               
+                                    
+                      
+                                     Padding(
+                                       padding: const EdgeInsets.only(left: 75,right: 75),
+                                       child: Container(
+                                        child: TextFormField(
+                                          controller: updatenameController,
+                                          validator: (value) {
+                                                 if (value == null || value.isEmpty) {
+                                                      return 'Please enter name';
+                                                   }
+                                                           return null;
+                                                    },
+                                          //initialValue: todo.tasklist[index].title,
+                                        decoration: InputDecoration
+                                         (
+                                         border: InputBorder.none
+                                    
+                                        
+                                    ),
+                              ),
+                                     ),
+                                     ),
+                              SizedBox(
+                                height: 5.0,
+                              ),
+                              Divider(
+                                color: Colors.grey,
+                                height: 4.0,
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(left: 30.0, right: 30.0),
+                                child: TextFormField(
+                                 controller: updatecontentController,
+                                  validator: (value) {
+                                    
+                                  if (value == null || value.isEmpty) {
+                                      return 'Please enter detail';
+                                  }
+                                      return null;
+                                  },
+                                  //initialValue: todo.tasklist[index].detail,
+                                  decoration: InputDecoration(
+                                    
+                                    border: InputBorder.none,
                                   ),
-                            ),
-                                   ),
-                                   ),
-                            SizedBox(
-                              height: 5.0,
-                            ),
-                            Divider(
-                              color: Colors.grey,
-                              height: 4.0,
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(left: 30.0, right: 30.0),
-                              child: TextFormField(
-                                validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                    return 'Please enter name';
-                                }
-                                    return null;
+                                  maxLines: 10,
+                                  
+                                ),
+                                
+                              ),
+                              GestureDetector(
+                                onTap:(){
+                                   Provider.of<TodoModel>(context,listen: false).updateTaskInList(todo.tasklist[index].id,
+                                  
+                                 TaskModel(
+                                      title: updatenameController.text.toString(),
+                                      detail: updatecontentController.text.toString(),
+
+                                    ));
+                                  
+                                   Feedback.forTap(context);
+                                   Navigator.of(context).pop();
+                                  
+                                _message();
+                                
                                 },
-                                initialValue: todo.tasklist[index].detail,
-                                decoration: InputDecoration(
+                                
+                                child: Container(
                                   
-                                  border: InputBorder.none,
-                                ),
-                                maxLines: 10,
-                                
-                              ),
-                              
-                            ),
-                            GestureDetector(
-                              onTap:(){
-                                
-                                 Feedback.forTap(context);
-                                
-                              _Message();
-                              
-                              },
-                              
-                              child: Container(
-                                
-                                padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
-                                decoration: BoxDecoration(
-                                  
-                                  color: HexColor('#29A0B1'),
-                                  borderRadius: BorderRadius.only(
-                                      bottomLeft: Radius.circular(32.0),
-                                      bottomRight: Radius.circular(32.0)),
-                                ),
-                                child: Text(
-                                  "Submit",
-                                  style: TextStyle(color: Colors.black),
-                                  textAlign: TextAlign.center,
+                                  padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
+                                  decoration: BoxDecoration(
+                                    
+                                    color: HexColor('#29A0B1'),
+                                    borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(32.0),
+                                        bottomRight: Radius.circular(32.0)),
+                                  ),
+                                  child: Text(
+                                    "Submit",
+                                    style: TextStyle(color: Colors.black),
+                                    textAlign: TextAlign.center,
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
+                    ),
                     ),
                     Positioned(
                           right: -5.0,
