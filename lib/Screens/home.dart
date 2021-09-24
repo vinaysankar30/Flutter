@@ -160,7 +160,10 @@ Widget build(BuildContext context) {
                                           title: Text(todo.tasklist[index].title, style : TextStyle(color: Colors.black87,
                                               fontWeight: FontWeight.bold),),
                                           subtitle: Text(todo.tasklist[index].detail, style: TextStyle(color: Colors.black45,
-                                              fontWeight: FontWeight.bold),),
+                                              fontWeight: FontWeight.bold),
+                                              maxLines: 3,
+                                              overflow: TextOverflow.ellipsis,
+                                              ),
                                             
                                           trailing:   Container(
                                             padding: EdgeInsets.only(left: 20),
@@ -179,7 +182,8 @@ Widget build(BuildContext context) {
                                                 Text(todo.tasklist[index].date, style : TextStyle(color: Colors.black,
                                                 fontWeight: FontWeight.bold,fontSize: 8),),
                                                 Text(todo.tasklist[index].time, style : TextStyle(color: Colors.black,
-                                                fontWeight: FontWeight.bold,fontSize: 8),),
+                                                fontWeight: FontWeight.bold,fontSize: 8,),
+                                                ),
                                               ],
                                             ),
                                           ),
