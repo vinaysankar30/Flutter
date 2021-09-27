@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -25,7 +27,8 @@ class MyApp extends StatelessWidget {
       routes:{
           '/home':(context)=>Home(),
           '/addNew':(context)=>MyApp(),
-          Games.routeName:(context)=>Games()
+          Games.routeName:(context)=>Games(),
+          '/navBar':(context)=>MyHomePage()
         },
       theme: ThemeData(
         backgroundColor: Colors.black12,

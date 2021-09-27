@@ -136,7 +136,7 @@ Widget build(BuildContext context) {
                             CircularProgressIndicator(backgroundColor: Colors.black12,)
                             )
                             :ListView.builder(
-                                itemCount:todo.tasklist.length.compareTo(0),
+                                itemCount:todo.tasklist.length,
                                 itemBuilder: (context, index){
                                   TextEditingController updatenameController = TextEditingController(text: todo.tasklist[index].title);
                                   TextEditingController updatecontentController = TextEditingController(text: todo.tasklist[index].detail);
