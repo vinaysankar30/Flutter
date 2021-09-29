@@ -8,6 +8,7 @@ import 'package:intl/intl.dart';
 import 'package:todo_original/Models/TaskModel.dart';
 import 'package:todo_original/Models/swipeleft.dart';
 import 'package:todo_original/Models/swiperight.dart';
+import 'package:todo_original/Models/view.dart';
 import 'package:todo_original/Screens/drawer.dart';
 class Home extends StatefulWidget{
  
@@ -155,7 +156,12 @@ Widget build(BuildContext context) {
 
                                         ),
                                         child: ListTile(
-                                          onTap: (){},
+                                          onTap: (){
+                                            showDialog(context: context, builder: (BuildContext context){
+                                              return viewList();
+                                            });
+                                          
+                                          },
                                           contentPadding: EdgeInsets.only(left: 32, right: 32, top: 8, bottom: 8),
                                           title: Text(todo.tasklist[index].title, style : TextStyle(color: Colors.black87,
                                               fontWeight: FontWeight.bold),),
@@ -295,7 +301,7 @@ Widget build(BuildContext context) {
                                                    }
                                                            return null;
                                                     },
-                                          //initialValue: todo.tasklist[index].title,
+                                          
                                         decoration: InputDecoration
                                          (
                                          border: InputBorder.none
@@ -335,6 +341,7 @@ Widget build(BuildContext context) {
                               ),
                               GestureDetector(
                                 onTap:(){
+                                  
                                    Provider.of<TodoModel>(context,listen: false).updateTaskInList(todo.tasklist[index].id,
                                   
                                  TaskModel(
