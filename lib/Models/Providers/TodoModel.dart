@@ -8,7 +8,7 @@ import 'dart:convert';
 
 class TodoModel extends ChangeNotifier{
   List tasklist = [];
-   var url = Uri.parse('https://todoapp-72f66-default-rtdb.firebaseio.com/mynotes.json');
+   var url = Uri.parse('');
   
   Future<void> addTaskInList(TaskModel taskModel) async {
    http.post(url,body:jsonEncode({
@@ -44,7 +44,7 @@ class TodoModel extends ChangeNotifier{
   }
   Future<void> deleteContent(String id) async {
   final http.Response response = await http.delete(
-    Uri.parse('https://todoapp-72f66-default-rtdb.firebaseio.com/mynotes/$id.json'),
+    Uri.parse(''),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
@@ -56,7 +56,7 @@ class TodoModel extends ChangeNotifier{
 }
 
 Future<void> updateTaskInList(String id,TaskModel taskModel) async {
-  var url = Uri.parse('https://todoapp-72f66-default-rtdb.firebaseio.com/mynotes/$id.json');
+  var url = Uri.parse('');
    await http.patch(url,body:jsonEncode({
       'title':taskModel.title,
       'detail':taskModel.detail,
