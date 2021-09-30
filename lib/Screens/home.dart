@@ -158,7 +158,12 @@ Widget build(BuildContext context) {
                                         child: ListTile(
                                           onTap: (){
                                             showDialog(context: context, builder: (BuildContext context){
-                                              return viewList();
+                                              return viewList(
+                                                todo.tasklist[index].title,
+                                                todo.tasklist[index].detail,
+                                                todo.tasklist[index].date,
+                                                todo.tasklist[index].time,
+                                              );
                                             });
                                           
                                           },

@@ -197,7 +197,7 @@ packages:
       name: provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "6.0.0"
+    version: "6.0.1"
   rflutter_alert:
     dependency: "direct main"
     description:
